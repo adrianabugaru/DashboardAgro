@@ -1,0 +1,17 @@
+﻿body {
+    background-color: #e8f0c0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#first {
+    margin-left: 20px;
+}
+
+#second {
+    margin-left: 50px;
+    margin-right: -900px;
+}

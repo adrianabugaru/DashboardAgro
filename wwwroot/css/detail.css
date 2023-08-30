@@ -1,0 +1,37 @@
+﻿body {
+    background-color: #e8f0c0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    padding: 10px;
+}
+/*.grid-container > div {
+        background: rgba(255, 255, 255, 0.41);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        text-align: center;
+        padding: 20px 0;
+        font-size: 30px;
+    }
+*/
+/*.table{
+        float:left;
+        width:200px;
+    }*/
+table.table-bordered {
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+    table.table-bordered > thead > tr > th {
+        border: 1px solid black;
+    }
+
+    table.table-bordered > tbody > tr > td {
+        border: 1px solid black;
+    }

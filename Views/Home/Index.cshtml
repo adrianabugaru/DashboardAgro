@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+<div class="bg-text">
+    <h1>Welcome to </h1><h1 class="name">AgroMon</h1>
+    
+</div>
+
+
+<style>
+    body {
+        background-image: url('/Images/1.jpg');
+        /* Add the blur effect */
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    .name {
+        font-weight: bold;
+    }
+
+    /* Position text in the middle of the page/image */
+    .bg-text {
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+        color: white;
+        /*font-weight: bold;*/
+        border: 3px solid #f1f1f1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 40%;
+        padding: 20px;
+        text-align: center;
+    }
+
+</style>
+
+

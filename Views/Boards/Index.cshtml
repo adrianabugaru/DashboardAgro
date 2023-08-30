@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DashboardAgro.Models.Board>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/index.css" />
+<style>
+    body {
+        background-color: #e8f0c0;
+    }
+</style>
+
+<h1>Land Board</h1>
+<br />
+<p>
+    <a class="btn btn-success btn-lg" asp-action="Create">Create New</a>
+</p>
+
+
+
+<div class="grid-container">
+
+
+    @foreach (var item in Model)
+    {
+
+        <div>
+            @Html.DisplayFor(modelItem => item.Name)
+            <br />
+
+            @*@Html.DisplayFor(modelItem => item.Location)*@
+            <br />
+
+            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+        </div>
+    }
+</div>
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 10px;
+        padding: 10px;
+    }
+
+        .grid-container > div {
+            background: rgba(255, 255, 255, 0.41);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 30px;
+        }
+</style>

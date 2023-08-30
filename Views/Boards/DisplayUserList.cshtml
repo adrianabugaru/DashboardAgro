@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "DisplayUserList";
+}
+
+<h1>User List</h1>
+
+<p>
+    <a asp-action="DisplayUserList" asp-controller="Boards">
+
+    </a>
+    <table>
+
+        <thead>
+            <tr>
+                <th width="400px">
+                    Id
+                </th>
+
+                <th width="300px">
+                    Email
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var users in Model)
+        {
+            <tr>
+                <td width="300px">
+                    @users.Id
+                </td>
+
+                <td width="300px">
+                    @users.Email
+                </td>
+
+            </tr>
+        }
+    </table>
+</p>

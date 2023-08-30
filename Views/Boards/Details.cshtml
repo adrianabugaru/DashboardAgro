@@ -1,0 +1,140 @@
+﻿@using Newtonsoft.Json;
+@model DashboardAgro.Models.Board
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<script src="~/js/detail.js"></script>*@
+<script type='text/javascript'
+        src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap'
+        async defer></script>
+<link rel="stylesheet" href="~/css/detail.css" />
+@{
+    var mapPoints = Model.Location.MapPoints.Select(c => new { c.Latitude, c.Longitude}).ToList();
+}
+
+<h1>Details</h1>
+<body>
+    <div class="grid-container">
+        <div class="row">
+            <div id="myMap" style="position:relative;width:600px;height:400px;"></div>
+        </div>
+
+        @*Weather table*@
+        <div class="row">
+            <table id="table" class="table table-striped ">
+                <thead class="thead-dark">
+                    <tr>
+                       
+                        <th scope="col">Forecast</th>
+                        <th scope="col">Temperature</th>
+                        <th scope="col">Humidity</th>
+                        <th scope="col">Pressure</th>
+                    </tr>
+                </thead>
+                <tbody id="table_body">
+                    <tr>
+                        
+                        <td>hello</td>
+                        <td>hello</td>
+                        <td>hello</td>
+                        <td>hello</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</body>
+
+<div>
+    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-danger" asp-action="Index">Back to List</a>
+</div>
+@{
+    var myLocations = JsonConvert.SerializeObject(mapPoints, Formatting.None,
+                        new JsonSerializerSettings()
+                                {
+                                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                                });
+}
+<script>
+    var longitude = parseFloat("@mapPoints.FirstOrDefault().Longitude.ToString();")
+    var latitude = parseFloat("@mapPoints.FirstOrDefault().Latitude.ToString();")
+    
+
+    let fetchLink = 'https://api.agromonitoring.com/agro/1.0/weather?lat=' + latitude +
+        '&lon=' + longitude + '&appid=f39712e654bf3acf782c64b78437f540';
+    
+
+    fetch(fetchLink)
+        .then((data) => {
+            return data.json();
+        }).then((completeData) => {
+            console.log(completeData.weather);
+            console.log(completeData.main);
+            console.log(completeData.main.humidity);
+
+            let tableData = "";
+
+            let valNum = parseFloat(completeData.main.temp);
+            let temp = (valNum - 273.15).toFixed(1);
+
+            completeData.weather.map((values) => {
+                tableData =
+                    `<tr>
+                
+                <td>${values.description}</td>
+                <td>${temp}°C</td>
+                <td>${completeData.main.humidity}%</td>
+                <td>${completeData.main.pressure} mmHg</td>
+                </tr>`;
+            });
+
+            document.getElementById('table_body').innerHTML = tableData;
+        })
+
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'Aq1cH-6S5LPVeMtUB5ptNesziKfdnk0W6j6pZ5zpSWKYM9BgYTFBDSDvMu68T9Lh',
+
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 10
+        });
+
+        //Request the user's location
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var latitude = parseFloat("@mapPoints.FirstOrDefault().Latitude");
+            var longitude = parseFloat("@mapPoints.FirstOrDefault().Longitude");
+            var loc = new Microsoft.Maps.Location(
+                latitude,
+                longitude);
+
+            //Add a pushpin at the user's location.
+            var pushpin = new Microsoft.Maps.Pushpin(loc, {
+                icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                title: 'Selected location',
+            });
+
+            var actualLocations = @Html.Raw(myLocations);
+            
+            let microsoftPoints = [];
+
+            actualLocations.forEach((element, index, array) => {
+                console.log(element);
+                microsoftPoints.push(new Microsoft.Maps.Location(element.Latitude, element.Longitude))
+            });
+
+            var polygon = new Microsoft.Maps.Polygon(microsoftPoints);
+
+
+            map.entities.push(polygon);
+            map.entities.push(pushpin);
+            map.setView({ center: loc, zoom: 15 });
+        });
+    }
+
+</script>
