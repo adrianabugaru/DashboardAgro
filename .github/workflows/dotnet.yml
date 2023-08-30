@@ -34,6 +34,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@latest
+      uses: JamesIves/github-pages-deploy-action@4.4.3
       with:
-          folder: build # The folder the action should deploy.
+        folder: build # The folder the action should deploy.
