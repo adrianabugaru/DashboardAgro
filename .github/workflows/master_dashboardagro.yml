@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'DashboardAgro'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1666A59395E5400D8D78F56F7C5EC547 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF842F6EC5E747D3865EAA5D59050950 }}
           package: .
