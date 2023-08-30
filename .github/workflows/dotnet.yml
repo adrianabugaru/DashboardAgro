@@ -32,6 +32,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@4.4.3
+      run: dotnet test --no-build --verbosity normal                  
+    - name: Deploy to GitHub Pages              
+      uses: JamesIves/github-pages-deploy-action@v4.4.3
